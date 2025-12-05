@@ -1,0 +1,366 @@
+/* Hero Section - CSS Animations */
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.6));
+  }
+}
+
+.hero-logo {
+  opacity: 0;
+  animation: heroFadeIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.hero-logo img {
+  animation: logoFloat 4s ease-in-out infinite, logoGlow 3s ease-in-out infinite;
+}
+
+/* Title wrapper */
+.hero-title-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Constant glow on text */
+.glow-text {
+  animation: heroFadeIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s forwards;
+  text-shadow: 
+    0 0 10px rgba(59, 130, 246, 0.4),
+    0 0 25px rgba(59, 130, 246, 0.25),
+    0 0 50px rgba(139, 92, 246, 0.15),
+    0 0 70px rgba(6, 182, 212, 0.1);
+}
+
+.hero-title {
+  opacity: 0;
+}
+
+/* Particles container */
+.particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 200%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* Individual particle */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* Different particle animations for different directions */
+@keyframes particleUp {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  15% {
+    opacity: 0.8;
+    transform: translate(0, -10px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 0), -100px) scale(0.3);
+  }
+}
+
+@keyframes particleDown {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  15% {
+    opacity: 0.8;
+    transform: translate(0, 10px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 0), 100px) scale(0.3);
+  }
+}
+
+@keyframes particleDiagonal {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  15% {
+    opacity: 0.7;
+    transform: translate(5px, -5px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 60px), var(--ty, -60px)) scale(0.2);
+  }
+}
+
+/* Particle 1 - Blue, going up-left */
+.particle:nth-child(1) {
+  left: 20%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  background: #3b82f6;
+  --tx: -30px;
+  animation: particleUp 5s ease-out infinite 0s;
+}
+
+/* Particle 2 - Violet, going up */
+.particle:nth-child(2) {
+  left: 35%;
+  top: 45%;
+  width: 3px;
+  height: 3px;
+  background: #8b5cf6;
+  --tx: 10px;
+  animation: particleUp 4.5s ease-out infinite 0.3s;
+}
+
+/* Particle 3 - Cyan, going up-right */
+.particle:nth-child(3) {
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  background: #06b6d4;
+  --tx: 25px;
+  animation: particleUp 5.5s ease-out infinite 0.6s;
+}
+
+/* Particle 4 - Light blue, going down */
+.particle:nth-child(4) {
+  left: 65%;
+  top: 55%;
+  width: 3px;
+  height: 3px;
+  background: #60a5fa;
+  --tx: -15px;
+  animation: particleDown 4s ease-out infinite 0.2s;
+}
+
+/* Particle 5 - Purple, going diagonal */
+.particle:nth-child(5) {
+  left: 80%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  background: #a78bfa;
+  --tx: 80px;
+  --ty: -50px;
+  animation: particleDiagonal 5s ease-out infinite 0.8s;
+}
+
+/* Particle 6 - Deep violet, going up */
+.particle:nth-child(6) {
+  left: 15%;
+  top: 60%;
+  width: 3px;
+  height: 3px;
+  background: #7c3aed;
+  --tx: -40px;
+  animation: particleUp 4.8s ease-out infinite 1s;
+}
+
+/* Particle 7 - Sky blue, going down-right */
+.particle:nth-child(7) {
+  left: 45%;
+  top: 55%;
+  width: 4px;
+  height: 4px;
+  background: #38bdf8;
+  --tx: 50px;
+  --ty: 70px;
+  animation: particleDiagonal 5.2s ease-out infinite 0.4s;
+}
+
+/* Particle 8 - Indigo, going up */
+.particle:nth-child(8) {
+  left: 75%;
+  top: 45%;
+  width: 5px;
+  height: 5px;
+  background: #6366f1;
+  --tx: 20px;
+  animation: particleUp 4.6s ease-out infinite 1.2s;
+}
+
+/* Particle 9 - Teal, going diagonal left */
+.particle:nth-child(9) {
+  left: 10%;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  background: #14b8a6;
+  --tx: -70px;
+  --ty: -40px;
+  animation: particleDiagonal 5.4s ease-out infinite 0.5s;
+}
+
+/* Particle 10 - Light violet, going down */
+.particle:nth-child(10) {
+  left: 55%;
+  top: 60%;
+  width: 4px;
+  height: 4px;
+  background: #c4b5fd;
+  --tx: 30px;
+  animation: particleDown 4.3s ease-out infinite 0.7s;
+}
+
+/* Particle 11 - Electric blue, going up-left */
+.particle:nth-child(11) {
+  left: 30%;
+  top: 40%;
+  width: 3px;
+  height: 3px;
+  background: #3b82f6;
+  --tx: -50px;
+  animation: particleUp 5.1s ease-out infinite 1.5s;
+}
+
+/* Particle 12 - Fuchsia, going diagonal */
+.particle:nth-child(12) {
+  left: 85%;
+  top: 55%;
+  width: 4px;
+  height: 4px;
+  background: #d946ef;
+  --tx: 60px;
+  --ty: 50px;
+  animation: particleDiagonal 4.7s ease-out infinite 0.9s;
+}
+
+/* Particle 13 - Soft cyan, going up */
+.particle:nth-child(13) {
+  left: 25%;
+  top: 55%;
+  width: 5px;
+  height: 5px;
+  background: #22d3ee;
+  --tx: -20px;
+  animation: particleUp 5.3s ease-out infinite 1.8s;
+}
+
+/* Particle 14 - Purple blue, going down-left */
+.particle:nth-child(14) {
+  left: 5%;
+  top: 45%;
+  width: 3px;
+  height: 3px;
+  background: #818cf8;
+  --tx: -80px;
+  --ty: 60px;
+  animation: particleDiagonal 4.9s ease-out infinite 1.1s;
+}
+
+/* Particle 15 - Light purple, going up */
+.particle:nth-child(15) {
+  left: 60%;
+  top: 40%;
+  width: 4px;
+  height: 4px;
+  background: #a855f7;
+  --tx: 15px;
+  animation: particleUp 5.6s ease-out infinite 2s;
+}
+
+/* Particle 16 - Deep blue, going diagonal */
+.particle:nth-child(16) {
+  left: 90%;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  background: #2563eb;
+  --tx: 90px;
+  --ty: -30px;
+  animation: particleDiagonal 4.4s ease-out infinite 0.1s;
+}
+
+/* Particle 17 - Violet, going down */
+.particle:nth-child(17) {
+  left: 40%;
+  top: 60%;
+  width: 4px;
+  height: 4px;
+  background: #8b5cf6;
+  --tx: -10px;
+  animation: particleDown 5s ease-out infinite 1.4s;
+}
+
+/* Particle 18 - Cyan glow, going up-right */
+.particle:nth-child(18) {
+  left: 70%;
+  top: 45%;
+  width: 5px;
+  height: 5px;
+  background: #06b6d4;
+  --tx: 45px;
+  animation: particleUp 4.2s ease-out infinite 1.6s;
+}
+
+/* Particle 19 - Soft purple, going diagonal */
+.particle:nth-child(19) {
+  left: 50%;
+  top: 55%;
+  width: 3px;
+  height: 3px;
+  background: #c084fc;
+  --tx: -60px;
+  --ty: -80px;
+  animation: particleDiagonal 5.8s ease-out infinite 2.2s;
+}
+
+/* Particle 20 - Blue violet, going down */
+.particle:nth-child(20) {
+  left: 80%;
+  top: 60%;
+  width: 4px;
+  height: 4px;
+  background: #7c3aed;
+  --tx: 35px;
+  animation: particleDown 4.1s ease-out infinite 1.3s;
+}
+
+.hero-subtitle-main {
+  opacity: 0;
+  animation: heroFadeIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards;
+}
+
+.hero-subtitle {
+  opacity: 0;
+  animation: heroFadeIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.35s forwards;
+}
+
+.hero-cta {
+  opacity: 0;
+  animation: heroFadeIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards;
+}
