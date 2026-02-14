@@ -25,28 +25,11 @@ const HeroSection = () => {
           
           {/* Title with glow and particles */}
           <div className="hero-title-wrapper relative">
-            {/* Particles */}
+            {/* Particles - generated dynamically */}
             <div className="particles">
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
-              <span className="particle"></span>
+              {Array.from({ length: 20 }, (_, i) => (
+                <span key={i} className="particle" />
+              ))}
             </div>
             
             <h1 className="hero-title text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-none tracking-tight text-gradient glow-text">

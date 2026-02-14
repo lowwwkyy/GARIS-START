@@ -14,34 +14,48 @@ const Navbar = () => {
     }
   };
 
-  // Track active section on scroll
+  // Track active section on scroll with throttling for performance
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      const sections = ['hero', 'visi', 'layanan', 'harga'];
-      const scrollPos = window.scrollY + 200;
-      
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const top = element.offsetTop;
-          const height = element.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(section);
-            break;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const sections = ['hero', 'visi', 'layanan', 'harga', 'kontak'];
+          const scrollPosition = window.scrollY + window.innerHeight * 0.4;
+          
+          // Iterate backwards - first section whose top is above scroll position wins
+          for (let i = sections.length - 1; i >= 0; i--) {
+            const element = document.getElementById(sections[i]);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              const elementTop = rect.top + window.scrollY;
+              
+              if (scrollPosition >= elementTop) {
+                if (activeSection !== sections[i]) {
+                  setActiveSection(sections[i]);
+                }
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activeSection]);
 
   const navItems = [
-    { id: 'hero', label: 'HOME' },
-    { id: 'visi', label: 'VISION' },
-    { id: 'layanan', label: 'SERVICE' },
-    { id: 'harga', label: 'PRICING' }
+    { id: 'hero', label: 'BERANDA' },
+    { id: 'visi', label: 'VISI' },
+    { id: 'layanan', label: 'LAYANAN' },
+    { id: 'harga', label: 'HARGA' },
+    { id: 'kontak', label: 'KONTAK' }
   ];
 
   return (
@@ -70,10 +84,11 @@ const Navbar = () => {
       >
         <div className="dynamic-island-content">
           {!isMenuOpen ? (
-            <div className="dynamic-island-pill">
-              <div className="pill-indicator"></div>
-              <div className="pill-indicator"></div>
-              <div className="pill-indicator"></div>
+            <div className="dynamic-island-collapsed">
+              <span className="current-section-label">
+                {navItems.find(item => item.id === activeSection)?.label || 'HOME'}
+              </span>
+              <span className="expand-indicator">▾</span>
             </div>
           ) : (
             <div className="dynamic-island-menu">
