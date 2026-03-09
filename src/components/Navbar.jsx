@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import translations from '../translations';
 import './Navbar.css';
+import './LanguageToggle.css';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const { language, setLanguage } = useLanguage();
+  const t = translations.nav[language];
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -51,11 +56,11 @@ const Navbar = () => {
   }, [activeSection]);
 
   const navItems = [
-    { id: 'hero', label: 'BERANDA' },
-    { id: 'visi', label: 'VISI' },
-    { id: 'layanan', label: 'LAYANAN' },
-    { id: 'harga', label: 'HARGA' },
-    { id: 'kontak', label: 'KONTAK' }
+    { id: 'hero', label: t.home },
+    { id: 'visi', label: t.vision },
+    { id: 'layanan', label: t.services },
+    { id: 'harga', label: t.pricing },
+    { id: 'kontak', label: t.contact }
   ];
 
   return (
@@ -86,7 +91,7 @@ const Navbar = () => {
           {!isMenuOpen ? (
             <div className="dynamic-island-collapsed">
               <span className="current-section-label">
-                {navItems.find(item => item.id === activeSection)?.label || 'HOME'}
+                {navItems.find(item => item.id === activeSection)?.label || t.home}
               </span>
               <span className="expand-indicator">▾</span>
             </div>
@@ -103,12 +108,31 @@ const Navbar = () => {
                 </button>
               ))}
               <div className="close-divider"></div>
+              {/* Mobile Language Toggle */}
+              <div 
+                className="mobile-lang-toggle"
+                style={{ animationDelay: '0.25s' }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className={`mobile-lang-btn ${language === 'id' ? 'active' : ''}`}
+                  onClick={() => setLanguage('id')}
+                >
+                  ID
+                </button>
+                <button
+                  className={`mobile-lang-btn ${language === 'en' ? 'active' : ''}`}
+                  onClick={() => setLanguage('en')}
+                >
+                  EN
+                </button>
+              </div>
               <button 
                 className="close-btn"
                 onClick={(e) => { e.stopPropagation(); setIsMenuOpen(false); }}
-                style={{ animationDelay: '0.25s' }}
+                style={{ animationDelay: '0.3s' }}
               >
-                ✕ CLOSE
+                {t.close}
               </button>
             </div>
           )}

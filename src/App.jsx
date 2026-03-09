@@ -1,5 +1,7 @@
+import { LanguageProvider } from './context/LanguageContext';
 import AnimatedBackground from './components/AnimatedBackground';
 import Navbar from './components/Navbar';
+import LanguageToggle from './components/LanguageToggle';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import ServicesSection from './components/ServicesSection';
@@ -10,16 +12,19 @@ import './App.css';
 
 function App() {
   return (
-    <div className="relative min-h-screen text-white overflow-x-hidden">
-      <AnimatedBackground />
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <PricingSection />
-      <ContactSection />
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="relative min-h-screen text-white overflow-x-hidden">
+        <AnimatedBackground />
+        <Navbar />
+        <LanguageToggle />
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <PricingSection />
+        <ContactSection />
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 }
 

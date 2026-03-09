@@ -1,7 +1,12 @@
+import { useLanguage } from '../context/LanguageContext';
+import translations from '../translations';
 import './HeroSection.css';
 import logo from '../../Assets/GARIS_START-removebg-preview.png';
 
 const HeroSection = () => {
+  const { language } = useLanguage();
+  const t = translations.hero[language];
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -39,18 +44,18 @@ const HeroSection = () => {
         </div>
         
         <h2 className="hero-subtitle-main text-3xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight text-white">
-          Transformasi Digital Bisnis Anda
+          {t.subtitle}
         </h2>
 
         <p className="hero-subtitle text-xl md:text-2xl text-white/70 mb-12 max-w-3xl mx-auto">
-          Modernisasi UMKM Anda dengan website profesional dan branding yang tepat guna
+          {t.description}
         </p>
 
         <button
           onClick={() => scrollToSection('kontak')}
           className="hero-cta px-8 py-4 bg-gradient-to-r from-electric-blue via-deep-violet to-cyan-glow rounded-full text-lg font-semibold shadow-lg shadow-electric-blue/50 hover:shadow-xl hover:shadow-deep-violet/50 hover:scale-105 active:scale-95 transition-all"
         >
-          Mulai Sekarang
+          {t.cta}
         </button>
       </div>
     </section>
