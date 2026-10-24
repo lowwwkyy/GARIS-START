@@ -1,5 +1,5 @@
 import { Check } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import translations from '../translations';
 import GlassCard from './GlassCard';
 
@@ -7,7 +7,7 @@ const PricingSection = () => {
   const { language } = useLanguage();
   const t = translations.pricing[language];
 
-  const colors = ['electric-blue', 'deep-violet', 'cyan-glow'];
+  const colors = ['text-electric-blue', 'text-deep-violet', 'text-cyan-glow'];
   const highlighted = [false, true, false];
 
   return (
@@ -35,13 +35,13 @@ const PricingSection = () => {
                 </div>
                 <div className="text-center pt-4">
                   <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
-                  <div className={`text-4xl font-bold text-${color} mb-6`}>
+                  <div className={`text-4xl font-bold ${color} mb-6`}>
                     {tier.price}
                   </div>
                   <ul className="space-y-4 text-left">
                     {tier.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <Check className={`text-${color} flex-shrink-0 mt-1`} size={20} />
+                        <Check className={`${color} flex-shrink-0 mt-1`} size={20} />
                         <span className="text-white/70">{feature}</span>
                       </li>
                     ))}
@@ -52,13 +52,13 @@ const PricingSection = () => {
               <GlassCard key={index}>
                 <div className="text-center">
                   <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
-                  <div className={`text-4xl font-bold text-${color} mb-6`}>
+                  <div className={`text-4xl font-bold ${color} mb-6`}>
                     {tier.price}
                   </div>
                   <ul className="space-y-4 text-left">
                     {tier.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <Check className={`text-${color} flex-shrink-0 mt-1`} size={20} />
+                        <Check className={`${color} flex-shrink-0 mt-1`} size={20} />
                         <span className="text-white/70">{feature}</span>
                       </li>
                     ))}

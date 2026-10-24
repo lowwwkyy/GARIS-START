@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useState, useEffect, useRef } from 'react';
+import { useLanguage } from '../hooks/useLanguage';
 import translations from '../translations';
 import './Navbar.css';
 import './LanguageToggle.css';
@@ -7,15 +7,21 @@ import './LanguageToggle.css';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const menuTriggerRef = useRef(null);
   const { language, setLanguage } = useLanguage();
   const t = translations.nav[language];
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    menuTriggerRef.current?.focus({ preventScroll: true });
+  };
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'auto' });
       setActiveSection(id);
-      setIsMenuOpen(false);
+      if (isMenuOpen) closeMenu();
     }
   };
 
@@ -66,7 +72,7 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop Floating Island Navbar */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 floating-island hidden md:block">
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 floating-island hidden lg:block">
         <div className="nav-container">
           {navItems.map((item, index) => (
             <button
@@ -84,22 +90,34 @@ const Navbar = () => {
 
       {/* Mobile Dynamic Island */}
       <div 
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 md:hidden dynamic-island ${isMenuOpen ? 'expanded' : ''}`}
-        onClick={() => !isMenuOpen && setIsMenuOpen(true)}
+        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 lg:hidden dynamic-island ${isMenuOpen ? 'expanded' : ''}`}
+        onKeyDown={(event) => {
+          if (event.key === 'Escape' && isMenuOpen) {
+            event.preventDefault();
+            closeMenu();
+          }
+        }}
       >
         <div className="dynamic-island-content">
-          {!isMenuOpen ? (
-            <div className="dynamic-island-collapsed">
-              <span className="current-section-label">
-                {navItems.find(item => item.id === activeSection)?.label || t.home}
-              </span>
-              <span className="expand-indicator">▾</span>
-            </div>
-          ) : (
-            <div className="dynamic-island-menu">
+          <button
+            ref={menuTriggerRef}
+            type="button"
+            className="dynamic-island-collapsed"
+            aria-expanded={isMenuOpen}
+            aria-controls={isMenuOpen ? 'mobile-navigation' : undefined}
+            onClick={() => isMenuOpen ? closeMenu() : setIsMenuOpen(true)}
+          >
+            <span className="current-section-label">
+              {navItems.find(item => item.id === activeSection)?.label || t.home}
+            </span>
+            <span className="expand-indicator" aria-hidden="true">▾</span>
+          </button>
+          {isMenuOpen && (
+            <div id="mobile-navigation" className="dynamic-island-menu">
               {navItems.map((item, index) => (
                 <button
                   key={item.id}
+                  autoFocus={index === 0}
                   onClick={(e) => { e.stopPropagation(); scrollToSection(item.id); }}
                   className={`mobile-nav-item ${activeSection === item.id ? 'active' : ''}`}
                   style={{ animationDelay: `${index * 0.05}s` }}
@@ -117,19 +135,21 @@ const Navbar = () => {
                 <button
                   className={`mobile-lang-btn ${language === 'id' ? 'active' : ''}`}
                   onClick={() => setLanguage('id')}
+                  aria-pressed={language === 'id'}
                 >
                   ID
                 </button>
                 <button
                   className={`mobile-lang-btn ${language === 'en' ? 'active' : ''}`}
                   onClick={() => setLanguage('en')}
+                  aria-pressed={language === 'en'}
                 >
                   EN
                 </button>
               </div>
               <button 
                 className="close-btn"
-                onClick={(e) => { e.stopPropagation(); setIsMenuOpen(false); }}
+                onClick={closeMenu}
                 style={{ animationDelay: '0.3s' }}
               >
                 {t.close}

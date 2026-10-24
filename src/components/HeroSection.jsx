@@ -1,4 +1,4 @@
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import translations from '../translations';
 import './HeroSection.css';
 import logo from '../../Assets/GARIS_START-removebg-preview.png';
@@ -10,7 +10,7 @@ const HeroSection = () => {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'auto' });
     }
   };
 

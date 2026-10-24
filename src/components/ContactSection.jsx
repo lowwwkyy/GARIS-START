@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Mail, Phone, Send } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import translations from '../translations';
 import GlassCard from './GlassCard';
 import './ContactSection.css';
@@ -33,12 +33,13 @@ const ContactSection = () => {
           {t.heading}
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {/* Contact Form */}
-          <GlassCard className="flex flex-col">
+          <GlassCard className="min-w-0 flex flex-col">
             <form className="flex flex-col flex-1" onSubmit={handleSubmit}>
-              <label className="block text-sm font-medium mb-2">{t.messageLabel}</label>
+              <label htmlFor="contact-message" className="block text-sm font-medium mb-2">{t.messageLabel}</label>
               <textarea
+                id="contact-message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 required
@@ -57,7 +58,7 @@ const ContactSection = () => {
           </GlassCard>
 
           {/* Contact Info */}
-          <GlassCard>
+          <GlassCard className="min-w-0">
             <div className="space-y-8">
               <div>
                 <h3 className="text-2xl font-bold mb-6">{t.infoTitle}</h3>
@@ -73,10 +74,10 @@ const ContactSection = () => {
                   rel="noopener noreferrer"
                   className="contact-link flex items-center gap-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all"
                 >
-                  <div className="p-3 bg-electric-blue/20 rounded-lg">
+                  <div className="shrink-0 p-3 bg-electric-blue/20 rounded-lg">
                     <Phone className="text-electric-blue" size={24} />
                   </div>
-                  <div>
+                  <div className="min-w-0 [overflow-wrap:anywhere]">
                     <div className="font-semibold">{t.whatsapp}</div>
                     <div className="text-white/70">+62 858-2970-1074</div>
                   </div>
@@ -86,10 +87,10 @@ const ContactSection = () => {
                   href="mailto:garisstart.salatiga@gmail.com"
                   className="contact-link flex items-center gap-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all"
                 >
-                  <div className="p-3 bg-deep-violet/20 rounded-lg">
+                  <div className="shrink-0 p-3 bg-deep-violet/20 rounded-lg">
                     <Mail className="text-deep-violet" size={24} />
                   </div>
-                  <div>
+                  <div className="min-w-0 [overflow-wrap:anywhere]">
                     <div className="font-semibold">{t.email}</div>
                     <div className="text-white/70">garisstart.salatiga@gmail.com</div>
                   </div>

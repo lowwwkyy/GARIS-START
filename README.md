@@ -1,4 +1,19 @@
-# React + Vite
+# GARIS START
+
+## Local development
+
+Run `npm install` once, then `npm run dev` from this directory. Open
+http://127.0.0.1:5173/ (or http://localhost:5173/) in your browser.
+
+Use one development server at a time. The port is fixed so a second server
+reports an error instead of silently starting elsewhere. If Vite's dependency
+cache becomes stale after an install or branch change, stop the server and run
+`npm run dev -- --force`, then reload the page.
+
+Run `npm run lint` and `npm run build` to check the project. Run
+`npm run preview` to serve the production build at http://127.0.0.1:4173/.
+
+## React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

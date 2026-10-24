@@ -1,5 +1,5 @@
 import { Target, Lightbulb } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import translations from '../translations';
 import GlassCard from './GlassCard';
 

@@ -40,6 +40,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Section headings already have 5rem of padding; leave room for the fixed nav. */
+section[id] {
+  scroll-margin-top: 2rem;
+}
+
 @layer utilities {
   .glass {
     @apply bg-white/5 backdrop-blur-lg border border-white/10;
@@ -144,12 +149,53 @@ html {
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Reveal content whose entrance animations normally set its final opacity. */
+  .hero-logo,
+  .hero-title,
+  .hero-subtitle-main,
+  .hero-subtitle,
+  .hero-cta,
+  .mobile-nav-item,
+  .mobile-lang-toggle,
+  .close-btn,
+  .close-divider,
   .fade-in-up,
   .animate-on-scroll,
   .hover-scale {
-    animation: none;
-    transition: none;
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .particles {
+    display: none;
+  }
+
+  .glass-card:hover,
+  .glass-card-featured:hover,
+  .contact-link:hover,
+  .hover-scale:hover,
+  .nav-pill:hover,
+  .nav-pill:active,
+  .lang-pill:hover,
+  .lang-pill:active,
+  .language-toggle-island:hover,
+  .expand-indicator,
+  .mobile-nav-item:hover,
+  .close-btn:hover {
+    transform: none !important;
+  }
+
+  /* Keep the horizontal positioning when disabling the nav's hover scale. */
+  .floating-island:hover,
+  .dynamic-island:not(.expanded):hover {
+    transform: translateX(-50%) !important;
   }
 }
