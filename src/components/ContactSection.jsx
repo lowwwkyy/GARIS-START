@@ -29,7 +29,7 @@ const ContactSection = () => {
   return (
     <section id="kontak" className="py-20 px-5 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient fade-in-up">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-electric-blue fade-in-up">
           {t.heading}
         </h2>
 
@@ -49,7 +49,7 @@ const ContactSection = () => {
 
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-gradient-to-r from-electric-blue via-deep-violet to-cyan-glow rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover-scale flex items-center justify-center gap-2"
+                className="action-button w-full px-6 py-3 bg-electric-blue rounded-lg font-semibold flex items-center justify-center gap-2"
               >
                 <Send size={20} />
                 {t.sendButton}
@@ -87,8 +87,8 @@ const ContactSection = () => {
                   href="mailto:garisstart.salatiga@gmail.com"
                   className="contact-link flex items-center gap-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all"
                 >
-                  <div className="shrink-0 p-3 bg-deep-violet/20 rounded-lg">
-                    <Mail className="text-deep-violet" size={24} />
+                  <div className="shrink-0 p-3 bg-electric-blue/20 rounded-lg">
+                    <Mail className="text-electric-blue" size={24} />
                   </div>
                   <div className="min-w-0 [overflow-wrap:anywhere]">
                     <div className="font-semibold">{t.email}</div>

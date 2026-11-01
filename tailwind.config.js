@@ -7,9 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'electric-blue': '#3b82f6',
-        'deep-violet': '#8b5cf6',
-        'cyan-glow': '#06b6d4',
+        'electric-blue': 'rgb(var(--accent-blue) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

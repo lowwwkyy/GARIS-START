@@ -5,10 +5,7 @@
   -webkit-backdrop-filter: blur(24px) saturate(1.2);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 60px;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
-  will-change: transform, box-shadow;
+  box-shadow: none;
   transition: 
     transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     box-shadow 0.4s ease,
@@ -18,75 +15,6 @@
 
 .language-toggle-island:hover {
   background: rgba(20, 25, 35, 0.5);
-  transform: scale(1.05);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
-    0 0 60px -10px rgba(59, 130, 246, 0.4),
-    0 0 100px -20px rgba(139, 92, 246, 0.3);
-}
-
-/* Animated gradient border on hover */
-.language-toggle-island::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: 61px;
-  padding: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(59, 130, 246, 0) 0%,
-    rgba(139, 92, 246, 0) 50%,
-    rgba(6, 182, 212, 0) 100%
-  );
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  transition: background 0.4s ease;
-}
-
-.language-toggle-island:hover::before {
-  background: linear-gradient(
-    135deg,
-    rgba(59, 130, 246, 0.6) 0%,
-    rgba(139, 92, 246, 0.4) 50%,
-    rgba(6, 182, 212, 0.6) 100%
-  );
-}
-
-/* Outer glow pulse */
-.language-toggle-island::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 64px;
-  background: linear-gradient(
-    135deg,
-    rgba(59, 130, 246, 0.3) 0%,
-    rgba(139, 92, 246, 0.2) 50%,
-    rgba(6, 182, 212, 0.3) 100%
-  );
-  filter: blur(16px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  z-index: -1;
-}
-
-.language-toggle-island:hover::after {
-  opacity: 1;
-  animation: langGlowPulse 2s ease-in-out infinite;
-}
-
-@keyframes langGlowPulse {
-  0%, 100% { opacity: 0.6; filter: blur(16px); }
-  50% { opacity: 1; filter: blur(20px); }
 }
 
 @keyframes langFloatIn {
@@ -129,9 +57,8 @@
   cursor: pointer;
   transform: scale(1);
   transition: 
-    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
     color 0.3s ease;
-  will-change: transform;
   letter-spacing: 1px;
   overflow: visible;
 }
@@ -153,9 +80,7 @@
     border-color 0.3s ease,
     box-shadow 0.3s ease;
   z-index: 0;
-  box-shadow: 
-    0 4px 16px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: none;
 }
 
 .lang-pill-text {
@@ -165,7 +90,7 @@
 
 .lang-pill:hover {
   color: #ffffff;
-  transform: scale(1.08);
+  transform: scale(1.025);
 }
 
 .lang-pill:hover .lang-pill-bg {
@@ -173,9 +98,6 @@
   transform: scale(1);
   background: rgba(40, 45, 60, 0.6);
   border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 
-    0 6px 24px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .lang-pill.active {
@@ -187,14 +109,10 @@
   transform: scale(1);
   background: rgba(45, 50, 65, 0.7);
   border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 
-    0 6px 24px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 20px rgba(255, 255, 255, 0.02);
 }
 
 .lang-pill:active {
-  transform: scale(0.95);
+  transform: scale(0.98);
 }
 
 /* ===== MOBILE LANGUAGE TOGGLE (inside dynamic island) ===== */
@@ -238,16 +156,22 @@
   border-radius: 12px;
   cursor: pointer;
   letter-spacing: 1px;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease, background 0.3s ease;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .mobile-lang-btn.active {
-  background: rgba(59, 130, 246, 0.25);
+  background: rgb(var(--accent-blue) / 0.25);
   color: #ffffff;
-  box-shadow: 
-    inset 0 0 20px rgba(59, 130, 246, 0.15),
-    0 0 20px -5px rgba(59, 130, 246, 0.4);
+  box-shadow: none;
+}
+
+.mobile-lang-btn:hover {
+  transform: scale(1.025);
+}
+
+.mobile-lang-btn:active {
+  transform: scale(0.98);
 }
 
 .mobile-lang-btn:not(.active):hover {

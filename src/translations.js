@@ -5,7 +5,7 @@ const translations = {
       home: 'BERANDA',
       vision: 'VISI',
       services: 'LAYANAN',
-      pricing: 'HARGA',
+      projects: 'PROJECTS',
       contact: 'KONTAK',
       close: '✕ TUTUP',
       language: 'BAHASA',
@@ -14,7 +14,7 @@ const translations = {
       home: 'HOME',
       vision: 'VISION',
       services: 'SERVICES',
-      pricing: 'PRICING',
+      projects: 'PROJECTS',
       contact: 'CONTACT',
       close: '✕ CLOSE',
       language: 'LANGUAGE',
@@ -46,7 +46,7 @@ const translations = {
         'Menjadi mitra terpercaya dalam proses digitalisasi UMKM dan platform lokal di Indonesia, mendorong pertumbuhan ekonomi inklusif dan berkelanjutan melalui teknologi yang tepat guna.',
       targetTitle: 'Target Kami',
       targetText:
-        'Kami menyasar pelaku usaha mikro, kecil, dan menengah, serta platform komunitas atau edukasi yang ingin beradaptasi dengan era digital. Kami percaya bahwa setiap bisnis — sekecil apa pun — memiliki potensi besar saat didukung oleh solusi digital yang tepat.',
+        'Kami menyasar pelaku usaha mikro, kecil, dan menengah, serta platform komunitas atau edukasi yang ingin beradaptasi dengan era digital. Kami percaya bahwa setiap bisnis, sekecil apa pun, memiliki potensi besar saat didukung oleh solusi digital yang tepat.',
     },
     en: {
       heading: 'Our Vision & Target',
@@ -55,7 +55,7 @@ const translations = {
         'To become a trusted partner in the digitalization of SMEs and local platforms in Indonesia, driving inclusive and sustainable economic growth through appropriate technology.',
       targetTitle: 'Our Target',
       targetText:
-        'We target micro, small, and medium enterprise owners, as well as community or education platforms looking to adapt to the digital era. We believe that every business — no matter how small — has great potential when supported by the right digital solutions.',
+        'We target micro, small, and medium enterprise owners, as well as community or education platforms looking to adapt to the digital era. We believe that every business, no matter how small, has great potential when supported by the right digital solutions.',
     },
   },
 
@@ -103,91 +103,23 @@ const translations = {
     },
   },
 
-  // Pricing Section
-  pricing: {
+  // Projects Section
+  projects: {
     id: {
-      heading: 'Paket Harga',
-      subtitle:
-        'Harga kami disesuaikan untuk UKM: terjangkau, cepat, dan hasil profesional',
-      popular: 'POPULAR',
-      tiers: [
-        {
-          name: 'Paket Starting',
-          price: 'Rp 600K - 800K',
-          features: [
-            '4-6 Halaman',
-            'Domain & Hosting',
-            'Desain template brand',
-            'Mobile Responsive',
-            'Email bisnis',
-          ],
-        },
-        {
-          name: 'Paket Growth',
-          price: 'Rp 900K - 1.2JT',
-          features: [
-            'Semua di Starting +',
-            'Website Multi-section',
-            'Desain Profesional',
-            'Form Kontak',
-            'Basic SEO',
-            'Integrasi Logo',
-          ],
-        },
-        {
-          name: 'Paket Business',
-          price: 'Rp 1.5JT - 2.5JT',
-          features: [
-            'Website Lengkap',
-            'Branding Package',
-            'Integrasi AI (Chatbot)',
-            'Analitik & SEO Lanjut',
-            'E-commerce/Custom',
-          ],
-        },
-      ],
+      heading: 'Project yang sudah kami kerjakan',
+      previewAlt: 'Pratinjau halaman utama Cultivatortech.com',
+      portfolioPreviewAlt: 'Pratinjau website portofolio Okky di Okkysr.me',
+      previewPending: 'Pratinjau langsung tersedia saat kartu terlihat',
+      loadingPreview: 'Memuat pratinjau langsung…',
+      previewUnavailable: 'Pratinjau belum tersedia. Klik untuk membuka website.',
     },
     en: {
-      heading: 'Pricing Plans',
-      subtitle:
-        'Our pricing is tailored for SMEs: affordable, fast, and professional results',
-      popular: 'POPULAR',
-      tiers: [
-        {
-          name: 'Starting Package',
-          price: 'Rp 600K - 800K',
-          features: [
-            '4-6 Pages',
-            'Domain & Hosting',
-            'Brand template design',
-            'Mobile Responsive',
-            'Business email',
-          ],
-        },
-        {
-          name: 'Growth Package',
-          price: 'Rp 900K - 1.2M',
-          features: [
-            'All in Starting +',
-            'Multi-section Website',
-            'Professional Design',
-            'Contact Form',
-            'Basic SEO',
-            'Logo Integration',
-          ],
-        },
-        {
-          name: 'Business Package',
-          price: 'Rp 1.5M - 2.5M',
-          features: [
-            'Complete Website',
-            'Branding Package',
-            'AI Integration (Chatbot)',
-            'Advanced Analytics & SEO',
-            'E-commerce/Custom',
-          ],
-        },
-      ],
+      heading: 'Our recent projects',
+      previewAlt: 'Cultivatortech.com homepage preview',
+      portfolioPreviewAlt: 'Preview of Okky’s portfolio website at Okkysr.me',
+      previewPending: 'Live preview loads when this card comes into view',
+      loadingPreview: 'Loading live preview…',
+      previewUnavailable: 'Preview unavailable. Click to open the website.',
     },
   },
 

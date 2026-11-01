@@ -1,0 +1,82 @@
+.project-preview {
+  background: #0b1220;
+  contain: layout paint;
+}
+
+.project-live-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 300%;
+  border: 0;
+  pointer-events: none;
+  transform: scale(0.3333333333);
+  transform-origin: top left;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.project-live-frame.is-ready {
+  opacity: 1;
+}
+
+.preview-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  background: radial-gradient(ellipse at top, rgb(var(--accent-blue) / 0.1), transparent 75%);
+}
+
+.preview-skeleton {
+  width: 72%;
+  margin: 0 auto;
+  opacity: 0.6;
+}
+
+.preview-skeleton > div {
+  background: rgb(255 255 255 / 0.09);
+  border-radius: 0.35rem;
+}
+
+.preview-skeleton-bar {
+  height: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.preview-skeleton-title {
+  width: 75%;
+  height: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.preview-skeleton-line {
+  height: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.preview-skeleton-line.short {
+  width: 60%;
+}
+
+.preview-skeleton-button {
+  width: 30%;
+  height: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.is-loading .preview-skeleton {
+  animation: preview-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes preview-pulse {
+  50% { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-loading .preview-skeleton { animation: none; }
+  .project-live-frame { transition: none; }
+}

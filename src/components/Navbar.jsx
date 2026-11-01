@@ -25,47 +25,45 @@ const Navbar = () => {
     }
   };
 
-  // Track active section on scroll with throttling for performance
+  // Use one passive listener and at most one pending frame. The subscription
+  // stays stable when the selected section changes.
   useEffect(() => {
-    let ticking = false;
+    let frame = null;
+    const sections = ['hero', 'visi', 'layanan', 'projects', 'kontak']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
     
     const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const sections = ['hero', 'visi', 'layanan', 'harga', 'kontak'];
-          const scrollPosition = window.scrollY + window.innerHeight * 0.4;
+      if (frame === null) {
+        frame = requestAnimationFrame(() => {
+          frame = null;
+          const marker = window.innerHeight * 0.4;
           
-          // Iterate backwards - first section whose top is above scroll position wins
           for (let i = sections.length - 1; i >= 0; i--) {
-            const element = document.getElementById(sections[i]);
-            if (element) {
-              const rect = element.getBoundingClientRect();
-              const elementTop = rect.top + window.scrollY;
-              
-              if (scrollPosition >= elementTop) {
-                if (activeSection !== sections[i]) {
-                  setActiveSection(sections[i]);
-                }
-                break;
-              }
+            if (sections[i].getBoundingClientRect().top <= marker) {
+              setActiveSection(sections[i].id);
+              break;
             }
           }
-          ticking = false;
         });
-        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeSection]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      if (frame !== null) cancelAnimationFrame(frame);
+    };
+  }, []);
 
   const navItems = [
     { id: 'hero', label: t.home },
     { id: 'visi', label: t.vision },
     { id: 'layanan', label: t.services },
-    { id: 'harga', label: t.pricing },
+    { id: 'projects', label: t.projects },
     { id: 'kontak', label: t.contact }
   ];
 
