@@ -7,11 +7,13 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 300%;
-  height: 300%;
+  /* The embedded document still renders at this size before being scaled.
+     Keep its layout area at 4x the card, rather than the previous 9x. */
+  width: 200%;
+  height: 200%;
   border: 0;
   pointer-events: none;
-  transform: scale(0.3333333333);
+  transform: scale(0.5);
   transform-origin: top left;
   opacity: 0;
   transition: opacity 180ms ease;

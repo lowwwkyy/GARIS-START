@@ -25,9 +25,11 @@ function LivePreview({ project, title, t }) {
 
   useEffect(() => {
     if (status !== 'loading') return;
-    // Cross-origin frames cannot expose their app's rendering state. Keep a
-    // useful fallback and the card link available if loading takes too long.
-    const timer = window.setTimeout(() => setStatus('slow'), 20000);
+    // Stop stalled loads rather than leaving an invisible, expensive website
+    // running behind the fallback. Do not retry until the preview is remounted.
+    const timer = window.setTimeout(() => {
+      setStatus(current => current === 'loading' ? 'slow' : current);
+    }, 20000);
     return () => window.clearTimeout(timer);
   }, [status]);
 
@@ -40,23 +42,27 @@ function LivePreview({ project, title, t }) {
           loading={status === 'loading'}
         />
       )}
-      <iframe
-        src={project.url}
-        title={title}
-        sandbox="allow-scripts allow-same-origin"
-        referrerPolicy="no-referrer"
-        tabIndex={-1}
-        aria-hidden="true"
-        onLoad={() => setStatus('ready')}
-        onError={() => setStatus('error')}
-        className={`project-live-frame ${status === 'ready' ? 'is-ready' : ''}`}
-      />
+      {(status === 'loading' || status === 'ready') && (
+        <iframe
+          src={project.url}
+          title={title}
+          sandbox="allow-scripts allow-same-origin"
+          referrerPolicy="no-referrer"
+          tabIndex={-1}
+          aria-hidden="true"
+          onLoad={() => setStatus(current => current === 'loading' ? 'ready' : current)}
+          onError={() => setStatus('error')}
+          className={`project-live-frame ${status === 'ready' ? 'is-ready' : ''}`}
+        />
+      )}
     </>
   );
 }
 
 export default function ProjectPreview({ project, title, t }) {
-  const { ref, isActive } = useViewportActivity({ rootMargin: '160px', releaseDelay: 10000 });
+  // Only load visible cards. A short grace period avoids reloading on small
+  // scroll adjustments without retaining offscreen websites for ten seconds.
+  const { ref, isActive } = useViewportActivity({ releaseDelay: 1000 });
 
   return (
     <div ref={ref} className="project-preview relative aspect-square overflow-hidden border-b border-white/10">
